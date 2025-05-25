@@ -12,7 +12,7 @@ Si vous pensez avoir identifié une faille de sécurité ou un comportement susp
 
 - Via la page "Contact" du site
 - En ouvrant un *issue* sur ce dépôt GitHub
-- En me contactant directement à l’adresse suivante : **[ton-email@exemple.com]**
+- En me contactant directement à l’adresse suivante : **tbonenfoy.web@gmail.com**
 
 Je m'engage à examiner tout signalement dans un délai raisonnable, et à corriger tout problème de sécurité pertinent.
 
