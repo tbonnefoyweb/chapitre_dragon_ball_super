@@ -23,7 +23,7 @@ Le but de ce site est **d'offrir une vue claire et organisée des publications D
 ## ⚖️ Mentions légales
 
 Les images, extraits et logos présents sur ce site sont la propriété exclusive de leurs ayants droit. Ils sont utilisés dans le cadre de l’exception de courte citation et du droit à l’information.  
-➡️ Consulte la section [LICENCE.md(./LICENCE.md].
+➡️ Consulte la section [LICENSE.md(./LICENSE.md].
 
 ## 🔒 Security Policy
 
