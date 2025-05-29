@@ -1,3 +1,66 @@
+/* === BANNIÈRE === */
+
+/* Conteneur principal de la bannière */
+.banner {
+    position: relative;
+    width: 100%;
+    height: 450px;                /* Hauteur de la bannière */
+    overflow: hidden;            /* Cache le dépassement */
+    display: flex;
+    justify-content: center;     /* Centrage horizontal */
+    align-items: center;         /* Centrage vertical */
+}
+
+/* Image de fond floutée */
+.banner-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  z-index: 1;
+}
+
+
+/* Conteneur de l’image nette au centre */
+.cover-container {
+    position: relative;
+    z-index: 2;                  /* Au-dessus de l’image floutée */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Image nette avec ombre */
+.cover {
+    max-width: 45%;
+    height: auto;
+    object-fit: contain;         /* Garde le ratio original */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Ombre stylée */
+}
+
+/* Variante image responsive */
+.cover-img {
+    max-height: 500px;
+    object-fit: contain;
+}
+
+/* Mode sombre : fond sombre et texte clair */
+[data-bs-theme="dark"] .card {
+    background-color: #1e1e2f;
+    color: #f8f9fa;
+}
+
+/* Mode clair : fond blanc et texte foncé */
+[data-bs-theme="light"] .card {
+    background-color: #ffffff;
+    color: #212529;
+}
+
 /* === Pagitanion === */
 
 /* Style de base du lien de pagination) */

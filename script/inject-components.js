@@ -13,4 +13,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (typeof initThemeToggle === "function") initThemeToggle();
     if (typeof initMusicToggle === "function") initMusicToggle();
   }, 100); // délai de sécurité
+
+// 2. Application des images de fond pour les éléments avec .banner-blur
+  const banners = document.querySelectorAll('.banner-blur[data-img]');
+
+  banners.forEach(banner => {
+    const img = banner.dataset.img;
+    if (img) {
+      banner.style.backgroundImage = `url(${img})`;
+    }
+  });
 });
