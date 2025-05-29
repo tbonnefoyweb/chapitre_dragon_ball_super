@@ -1,0 +1,25 @@
+/* === Pagitanion === */
+
+/* Style de base du lien de pagination) */
+.nav-arrow {
+  display: inline-flex;           /* Pour aligner texte et icône horizontalement */
+  align-items: center;           /* Centrage vertical parfait entre texte et icône */
+  gap: 0.25rem;                  /* Espacement entre le texte et l’icône */
+  text-decoration: none;         /* Supprime tout soulignement */
+  transition: color 0.2s ease;   /* Transition fluide de la couleur (si survol) */
+}
+
+/* Préparation de l'icône pour l’animation */
+.nav-arrow i {
+  transition: transform 0.3s ease; /* Animation fluide quand l’icône bouge */
+}
+
+/* Animation flèche droite */
+.nav-arrow.arrow-right:hover i {
+  transform: translateX(4px);     /* Déplace la flèche vers la droite */
+}
+
+/* Animation flèche gauche */
+.nav-arrow.arrow-left:hover i {
+  transform: translateX(-4px);    /* Déplace la flèche vers la gauche */
+}
