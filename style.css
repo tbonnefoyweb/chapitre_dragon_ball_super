@@ -18,6 +18,23 @@ body {
   overflow-x: hidden;
 }
 
+/* === BOUTON MODE SOMBRE/CLAIR === */
+
+/* Bouton toggle simple, sans style de fond ni bordure */
+#theme-toggle {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+/* Couleur de l’icône selon le thème */
+[data-bs-theme="dark"] #theme-icon {
+    color: #f8f9fa;
+}
+[data-bs-theme="light"] #theme-icon {
+    color: #212529;
+}
 
 /* Titres principaux avec un style visuel fort */
 h1, h2 {
