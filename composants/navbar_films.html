@@ -40,6 +40,20 @@
                     </ul>
                 </li>
 
+                <!-- Bouton mute/unmute + slider volume -->
+                <li class="nav-item position-relative">
+                    <div class="volume-wrapper d-flex align-items-center" style="overflow: hidden; width: 40px; transition: width 0.3s ease;">
+                        
+                        <!-- Bouton mute/unmute -->
+                        <button class="btn" id="music-toggle" aria-label="Toggle sound">
+                            <i id="music-icon" class="bi bi-volume-up-fill"></i>
+                        </button>
+
+                        <!-- Slider volume -->
+                        <input type="range" id="music-volume" min="0" max="1" step="0.01" value="1" class="slider ms-2" style="display: none; flex: 1;">
+                    </div>
+                </li>
+
                 <!-- Bouton dark mode -->
                 <li class="nav-item ms-3">
                     <button class="btn btn-outline-secondary" id="theme-toggle" aria-label="Switch theme">

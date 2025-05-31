@@ -36,6 +36,61 @@ body {
     color: #212529;
 }
 
+/* === SLIDER DE VOLUME === */
+
+/* Conteneur du slider (100% largeur) */
+.slidecontainer {
+  width: 100%;
+}
+
+/* Style général du slider */
+.slider {
+  -webkit-appearance: none;   /* Enlève le style par défaut (Safari/Chrome) */
+  appearance: none;           /* Compatibilité autres navigateurs */
+  width: 100%;                /* Occupe toute la largeur dispo */
+  height: 8px;                /* Hauteur de la "barre" */
+  border-radius: 5px;         /* Coins arrondis */
+  background: #d3d3d3;        /* Couleur de fond */
+  outline: none;              /* Supprime la bordure focus */
+  opacity: 0.7;               /* Transparence légère */
+  transition: opacity .2s;    /* Animation fluide au survol */
+}
+
+/* Augmente l’opacité du slider au survol */
+.slider:hover {
+  opacity: 1;
+}
+
+/* Style du "bouton" de contrôle (pouce) – version Webkit (Chrome, Safari) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;         /* Cercle parfait */
+  background: #090918;        /* Couleur du bouton */
+  cursor: pointer;
+}
+
+/* Style du "bouton" – version Firefox */
+.slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #090918;
+  cursor: pointer;
+}
+
+/* Agrandit le conteneur de volume au survol */
+.volume-wrapper:hover {
+  width: 130px !important;
+}
+
+/* Affiche le slider quand on survole le wrapper */
+.volume-wrapper:hover input[type=range] {
+  display: inline-block !important;
+}
+
 /* Titres principaux avec un style visuel fort */
 h1, h2 {
     font-weight: bold;

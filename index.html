@@ -104,6 +104,12 @@
     <!-- Footer -->
     <div data-include="composants/footer.html"></div>
 
+    <!-- Musique de fond -->
+    <audio autoplay loop id="bg-music">
+      <source src="tapions_theme.mp3" type="audio/mpeg">
+      Votre navigateur ne supporte pas l'audio HTML5.
+    </audio>
+
     <!-- #region Scripts -->
 
       <!-- Bootstrap JS -->
@@ -119,7 +125,10 @@
       <script src="script/dark-light-mode.js"></script>
 
       <!-- Injecte partie html -->
-      <script src="script/inject-components.js" defer></script> 
+      <script src="script/inject-components.js" defer></script>
+
+      <!-- Musique de fond -->
+      <script src="script/musique.js"></script>
 
     <!-- #endregion -->
 
