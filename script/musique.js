@@ -1,87 +1,97 @@
 function initMusicToggle() {
-  // Récupération des éléments du DOM liés à la musique
-  const music = document.getElementById("bg-music");         // élément <audio> de la musique de fond
-  const musicToggle = document.getElementById("music-toggle"); // bouton pour activer/désactiver la musique
-  const musicIcon = document.getElementById("music-icon");     // icône indiquant l'état du volume
-  const musicVolume = document.getElementById("music-volume"); // curseur pour régler le volume
+  const music = document.getElementById("bg-music");
+  const musicToggle = document.getElementById("music-toggle");
+  const musicIcon = document.getElementById("music-icon");
+  const musicVolume = document.getElementById("music-volume");
 
-  // Si l'un des éléments est introuvable, on arrête l'initialisation
   if (!music || !musicToggle || !musicIcon || !musicVolume) return;
 
-  // Récupérer le volume sauvegardé ou valeur par défaut
-  let volume = parseFloat(localStorage.getItem("musicVolume")) || parseFloat(musicVolume.value) || 1;
+  // --- Chargement des paramètres enregistrés ---
+  let volume = parseFloat(localStorage.getItem("musicVolume")) || 1;
+  let isMutedManually = localStorage.getItem("musicMuted") === "true";
 
-  // Récupérer l'état mute sauvegardé (true/false)
-  let savedMuted = localStorage.getItem("musicMuted");
-  let isMutedManually = savedMuted === "true";
-
-  // Synchroniser visuellement le slider avec le volume restauré
+  // Applique le volume
+  music.volume = volume;
   musicVolume.value = volume;
 
-  // Fonction qui met à jour l'icône du volume et l'état sonore selon le volume et le mute
+  // Si mute, on pause la musique
+  if (isMutedManually || volume === 0) {
+    music.pause();
+  } else {
+    music.play().catch(() => {}); // éviter l'erreur si autoplay bloqué
+  }
+
   function updateIconAndSound() {
     if (isMutedManually || volume === 0) {
-      musicIcon.className = "bi bi-volume-mute-fill"; // icône "muet"
+      musicIcon.className = "bi bi-volume-mute-fill";
       musicToggle.setAttribute("aria-label", "Musique coupée");
       music.pause();
     } else if (volume <= 0.5) {
-      musicIcon.className = "bi bi-volume-down-fill"; // icône volume faible
+      musicIcon.className = "bi bi-volume-down-fill";
       musicToggle.setAttribute("aria-label", "Volume faible");
-      if (music.paused) music.play();
+      if (music.paused) music.play().catch(() => {});
     } else {
-      musicIcon.className = "bi bi-volume-up-fill"; // icône volume fort
+      musicIcon.className = "bi bi-volume-up-fill";
       musicToggle.setAttribute("aria-label", "Volume élevé");
-      if (music.paused) music.play();
+      if (music.paused) music.play().catch(() => {});
     }
   }
 
-  // Événement au clic sur le bouton toggle pour mute/unmute
   musicToggle.addEventListener("click", () => {
-    isMutedManually = !isMutedManually; // inverse l'état mute
-    localStorage.setItem("musicMuted", isMutedManually);    // sauvegarde l'état mute
+    isMutedManually = !isMutedManually;
+    localStorage.setItem("musicMuted", isMutedManually); // ➕ sauvegarde du mute
     if (isMutedManually) {
       music.pause();
     } else {
       music.volume = volume;
-      musicVolume.value = music.volume;
-      music.play();
+      musicVolume.value = volume;
+      music.play().catch(() => {});
     }
     updateIconAndSound();
   });
 
-  // Événement quand on change le volume via le slider
   musicVolume.addEventListener("input", () => {
     volume = parseFloat(musicVolume.value);
     isMutedManually = (volume === 0);
     music.volume = volume;
-    localStorage.setItem("musicVolume", volume);   // sauvegarde volume
-    localStorage.setItem("musicMuted", isMutedManually);  // sauvegarde mute si volume à 0
-    if (!isMutedManually && music.paused) music.play();
+    localStorage.setItem("musicVolume", volume);           // ➕ sauvegarde volume
+    localStorage.setItem("musicMuted", isMutedManually);   // ➕ mise à jour mute
+    if (!isMutedManually && music.paused) music.play().catch(() => {});
     updateIconAndSound();
   });
 
-  // --- Gestion de la visibilité du slider ---
-  const volumeWrapper = document.querySelector(".volume-wrapper"); // wrapper slider (utilisé ailleurs)
-
+  // --- Affichage slider volume ---
+  const volumeWrapper = document.querySelector(".volume-wrapper");
   function showSlider() {
     musicVolume.classList.remove("hidden-slider");
     musicVolume.classList.add("visible-slider");
   }
-
   function hideSlider() {
     musicVolume.classList.remove("visible-slider");
     musicVolume.classList.add("hidden-slider");
   }
 
-  // Initialisation : appliquer le volume et l’état mute restaurés
-  music.volume = volume;
-  if (isMutedManually) {
-    music.pause();
-  } else {
-    music.play();
-  }
+  // Appliquer l’icône initiale
   updateIconAndSound();
 }
 
-// Démarrer l'initialisation
+// Appelle l'init
 initMusicToggle();
+
+
+// === SAUVEGARDE de la position musicale à chaque changement de page ===
+window.addEventListener("beforeunload", () => {
+  const music = document.getElementById("bg-music");
+  if (music) {
+    localStorage.setItem("musicCurrentTime", music.currentTime);
+  }
+});
+
+// === RESTAURATION automatique de la position musicale au chargement ===
+window.addEventListener("load", () => {
+  const music = document.getElementById("bg-music");
+  const savedTime = parseFloat(localStorage.getItem("musicCurrentTime"));
+  if (music && !isNaN(savedTime)) {
+    music.currentTime = savedTime;
+  }
+});
