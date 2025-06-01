@@ -2,6 +2,7 @@
 <html lang="fr" data-bs-theme="dark">
   <head>
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicon-->
@@ -37,11 +38,14 @@
       </div>
     </header>
 
-	  <!--Bannière-->
-    <div class="banner rounded">
-      <div class="banner-blur" data-img="img/cover/5.jpeg" data-aos="zoom-out"></div>
+    <!-- Bannière -->
+    <div class="banner rounded" onclick="toggleCover()">
+      <!-- Image floutée en fond -->
+      <div class="banner-blur" id="bannerBlur" data-img="img/cover/5.jpeg" data-aos="zoom-out" style="background-image: url('img/cover/5.jpeg');"></div>
+
+      <!-- Couverture centrale (popover ajouté dynamiquement) -->
       <div class="cover-container" data-aos="zoom-in">
-          <img src="img/cover/5.jpeg" alt="Couverture Manga" class="img-fluid cover rounded shadow">
+        <img src="img/cover/5.jpeg" alt="Couverture Manga" class="img-fluid cover rounded shadow" id="coverImage">
       </div>
     </div>
 
